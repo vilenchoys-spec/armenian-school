@@ -7,7 +7,7 @@
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Armenian:wght@500;700&family=Noto+Sans+Armenian:wght@400;600&family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=1793042009">
+<link rel="stylesheet" href="style.css?v=1793042123">
 </head>
 <body>
 
@@ -39,6 +39,11 @@
         <span class="menu-text"><b>Уроки</b><small>Материалы по каждому занятию</small></span>
         <span class="chev">›</span>
       </button>
+      <button class="menu-card" data-go="tasks">
+        <span class="menu-icon">✏️</span>
+        <span class="menu-text"><b>Задания</b><small>Упражнения для практики</small></span>
+        <span class="chev">›</span>
+      </button>
       <button class="menu-card" data-go="cards">
         <span class="menu-icon">🍎</span>
         <span class="menu-text"><b>Карточки</b><small>Учим слова</small></span>
@@ -51,6 +56,12 @@
   <section id="view-lessons" class="view">
     <h2 class="title">Уроки</h2>
     <div id="lessons-grid" class="grid"></div>
+  </section>
+
+  <!-- СПИСОК ЗАДАНИЙ -->
+  <section id="view-tasks" class="view">
+    <h2 class="title">Задания</h2>
+    <div id="tasks-list" class="grid"></div>
   </section>
 
   <!-- ОДИН УРОК -->
@@ -105,7 +116,7 @@
 
 </main>
 
-<script src="data.js?v=1793042009"></script>
-<script src="app.js?v=1793042009"></script>
+<script src="data.js?v=1793042123"></script>
+<script src="app.js?v=1793042123"></script>
 </body>
 </html>

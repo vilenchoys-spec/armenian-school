@@ -29,19 +29,22 @@ document.querySelectorAll('[data-go]').forEach((b) =>
   b.addEventListener('click', () => show(b.dataset.go))
 );
 
-// ---------- уроки ----------
-const list = $('lessons-grid');
-LESSONS.forEach((l) => {
-  const row = document.createElement('button');
-  row.className = 'lesson' + (l.pdf ? '' : ' soon');
-  row.innerHTML =
-    `<span class="lesson-num">${l.n}</span>` +
-    `<span class="lesson-body"><b>${l.title || 'Урок ' + l.n}</b>` +
-    `<small>${l.desc || 'Материал скоро появится'}</small></span>` +
-    `<span class="chev">›</span>`;
-  row.onclick = () => openLesson(l.n);
-  list.appendChild(row);
-});
+// ---------- уроки и задания ----------
+function renderList(el, items, label, kind) {
+  items.forEach((it) => {
+    const row = document.createElement('button');
+    row.className = 'lesson' + (it.pdf ? '' : ' soon');
+    row.innerHTML =
+      `<span class="lesson-num">${it.n}</span>` +
+      `<span class="lesson-body"><b>${it.title || label + ' ' + it.n}</b>` +
+      `<small>${it.desc || 'Материал скоро появится'}</small></span>` +
+      `<span class="chev">›</span>`;
+    row.onclick = () => openMaterial(kind, it, label);
+    el.appendChild(row);
+  });
+}
+renderList($('lessons-grid'), LESSONS, 'Урок', 'lesson');
+renderList($('tasks-list'), TASKS, 'Задание', 'task');
 
 let currentLesson = null;
 
@@ -49,16 +52,16 @@ function notify(msg) {
   tg && tg.showAlert ? tg.showAlert(msg) : alert(msg);
 }
 
-function openLesson(n) {
-  if (!LESSONS.find((l) => l.n === n && l.pdf)) {
-    notify(`Материал к уроку ${n} скоро появится 🌿`);
+function openMaterial(kind, item, label) {
+  if (!item.pdf) {
+    notify(`Материал скоро появится 🌿`);
     return;
   }
   currentLesson = {
-    url: new URL(`pdf/lesson-${n}.pdf`, location.href).href,
-    name: `Урок ${n} - Армянский.pdf`,
+    url: new URL(`pdf/${kind}-${item.n}.pdf`, location.href).href,
+    name: `${label} ${item.n} - Армянский.pdf`,
   };
-  $('lesson-title').textContent = `Урок ${n}`;
+  $('lesson-title').textContent = `${label} ${item.n}`;
   show('lesson');
 }
 
