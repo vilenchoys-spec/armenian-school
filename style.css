@@ -98,6 +98,7 @@ h1 { font-family: 'Playfair Display', serif; font-size: 30px; margin: 4px 0 6px;
 
 /* PDF */
 .pdf-pages { display: grid; gap: 12px; padding-bottom: 24px; }
+.pdf-slot { width: 100%; background: var(--bg-2); border-radius: 10px; overflow: hidden; color: var(--ink-soft); font-size: 13px; display: grid; place-items: center; }
 .pdf-pages canvas { width: 100%; height: auto; border-radius: 10px; background: #fff; box-shadow: var(--shadow); }
 .status { color: var(--ink-soft); text-align: center; padding: 20px 8px; font-size: 14px; }
 .status:empty { display: none; }
