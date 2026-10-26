@@ -83,18 +83,24 @@ h1 { font-family: 'Playfair Display', serif; font-size: 30px; margin: 4px 0 6px;
 /* TITLES */
 .title { font-family: 'Playfair Display', serif; font-size: 26px; margin: 8px 0 16px; }
 
-/* LESSONS GRID */
-.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.tile {
-  aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+/* LESSONS LIST */
+.grid { display: grid; gap: 10px; }
+.lesson {
+  display: flex; align-items: center; gap: 14px; width: 100%; text-align: left;
   background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
-  box-shadow: var(--shadow); cursor: pointer; font: inherit; color: inherit; position: relative;
+  padding: 14px; box-shadow: var(--shadow); cursor: pointer; font: inherit; color: inherit;
 }
-.tile:active { transform: scale(.96); }
-.tile .num { font-family: 'Playfair Display', serif; font-size: 34px; color: var(--pomegranate); line-height: 1; }
-.tile .lbl { font-size: 12px; color: var(--ink-soft); }
-.tile.empty { opacity: .55; }
-.tile.empty::after { content: '·'; position: absolute; top: 6px; right: 12px; color: var(--apricot); font-size: 22px; }
+.lesson:active { transform: scale(.98); }
+.lesson-num {
+  flex: none; width: 46px; height: 46px; display: grid; place-items: center;
+  background: var(--bg-2); border-radius: 14px;
+  font-family: 'Playfair Display', serif; font-size: 22px; color: var(--pomegranate);
+}
+.lesson-body { flex: 1; display: grid; gap: 3px; min-width: 0; }
+.lesson-body b { font-size: 16px; }
+.lesson-body small { color: var(--ink-soft); font-size: 13px; line-height: 1.35; }
+.lesson.soon { opacity: .55; box-shadow: none; }
+.lesson.soon .chev { display: none; }
 
 /* PDF */
 .pdf-pages { display: grid; gap: 12px; padding-bottom: 24px; }

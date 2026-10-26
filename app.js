@@ -30,14 +30,18 @@ document.querySelectorAll('[data-go]').forEach((b) =>
 );
 
 // ---------- уроки ----------
-const grid = $('lessons-grid');
-for (let n = 1; n <= LESSONS_COUNT; n++) {
-  const t = document.createElement('button');
-  t.className = 'tile';
-  t.innerHTML = `<span class="num">${n}</span><span class="lbl">урок</span>`;
-  t.onclick = () => openLesson(n);
-  grid.appendChild(t);
-}
+const list = $('lessons-grid');
+LESSONS.forEach((l) => {
+  const row = document.createElement('button');
+  row.className = 'lesson' + (l.pdf ? '' : ' soon');
+  row.innerHTML =
+    `<span class="lesson-num">${l.n}</span>` +
+    `<span class="lesson-body"><b>${l.title || 'Урок ' + l.n}</b>` +
+    `<small>${l.desc || 'Материал скоро появится'}</small></span>` +
+    `<span class="chev">›</span>`;
+  row.onclick = () => openLesson(l.n);
+  list.appendChild(row);
+});
 
 let currentLesson = null;
 
@@ -46,7 +50,7 @@ function notify(msg) {
 }
 
 function openLesson(n) {
-  if (!LESSONS_WITH_PDF.includes(n)) {
+  if (!LESSONS.find((l) => l.n === n && l.pdf)) {
     notify(`Материал к уроку ${n} скоро появится 🌿`);
     return;
   }
