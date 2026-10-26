@@ -83,16 +83,32 @@ function openMaterial(kind, item, label) {
     notify('Материал скоро появится 🌿');
     return;
   }
-  const files = [`${kind}-${item.n}.pdf`, ...(item.extra || [])];
   const box = $('lesson-files');
   box.innerHTML = '';
-  files.forEach((f, i) => {
-    const part = files.length > 1 ? ` — часть ${i + 1}` : '';
-    const url = absUrl(f);
-    const name = `${label} ${item.n}${part} - Армянский.pdf`;
-    box.appendChild(fileButton('👁', `Открыть${part}`, 'В браузере, можно приближать', () => openFile(url)));
-    box.appendChild(fileButton('⬇️', `Скачать${part}`, 'Сохранить PDF на телефон', () => downloadFile(url, name)));
-  });
+
+  if (item.parts) {
+    item.parts.forEach((p, i) => {
+      const url = absUrl(p.file);
+      const name = `${label} ${item.n} - ${p.title} - Армянский.pdf`;
+      const part = document.createElement('div');
+      part.className = 'part';
+      part.innerHTML =
+        `<span class="part-num">${i + 1}</span>` +
+        `<div class="part-body"><b>${p.title}</b><small>${p.desc}</small></div>` +
+        `<div class="part-actions">` +
+        `<button class="btn btn-main">👁 Открыть</button>` +
+        `<button class="btn btn-ghost">⬇️ Скачать</button></div>`;
+      const [open, dl] = part.querySelectorAll('button');
+      open.onclick = () => openFile(url);
+      dl.onclick = () => downloadFile(url, name);
+      box.appendChild(part);
+    });
+  } else {
+    const url = absUrl(`${kind}-${item.n}.pdf`);
+    const name = `${label} ${item.n} - Армянский.pdf`;
+    box.appendChild(fileButton('👁', 'Открыть', 'В браузере, можно приближать', () => openFile(url)));
+    box.appendChild(fileButton('⬇️', 'Скачать', 'Сохранить PDF на телефон', () => downloadFile(url, name)));
+  }
   $('lesson-title').textContent = `${label} ${item.n}`;
   show('lesson');
 }

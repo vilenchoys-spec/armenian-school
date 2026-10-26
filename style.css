@@ -149,3 +149,21 @@ h1 { font-family: 'Playfair Display', serif; font-size: 30px; margin: 4px 0 6px;
 .btn-main:active { background: var(--pomegranate-dark); }
 .btn-ghost { background: transparent; border-color: var(--pomegranate); color: var(--pomegranate); }
 .link-btn { display: block; margin: 16px auto 0; background: none; border: none; color: var(--ink-soft); font: inherit; cursor: pointer; }
+
+/* PARTS (несколько файлов в уроке) */
+#lesson-files { gap: 12px; }
+.part {
+  display: grid; grid-template-columns: auto 1fr; gap: 10px 14px; align-items: center;
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 14px; box-shadow: var(--shadow);
+}
+.part-num {
+  width: 38px; height: 38px; display: grid; place-items: center; border-radius: 12px;
+  background: var(--bg-2); color: var(--pomegranate);
+  font-family: 'Playfair Display', serif; font-size: 20px;
+}
+.part-body { display: grid; gap: 3px; min-width: 0; }
+.part-body b { font-size: 16px; }
+.part-body small { color: var(--ink-soft); font-size: 13px; line-height: 1.35; }
+.part-actions { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.part-actions .btn { padding: 11px; font-size: 15px; }
