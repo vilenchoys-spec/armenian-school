@@ -5,9 +5,6 @@ if (tg) {
   try { tg.setHeaderColor('#f3ead9'); tg.setBackgroundColor('#f3ead9'); } catch (e) {}
 }
 
-pdfjsLib.GlobalWorkerOptions.workerSrc =
-  'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-
 const $ = (id) => document.getElementById(id);
 const stack = ['home'];
 
@@ -42,68 +39,15 @@ for (let n = 1; n <= LESSONS_COUNT; n++) {
   grid.appendChild(t);
 }
 
-let renderToken = 0;
-let pageObserver = null;
-
-async function openLesson(n) {
-  const token = ++renderToken;
-  if (pageObserver) pageObserver.disconnect();
-  $('lesson-title').textContent = `Урок ${n}`;
-  $('pdf-pages').innerHTML = '';
-  $('pdf-status').textContent = 'Загружаю материал…';
-  show('lesson');
-
-  try {
-    const pdf = await pdfjsLib.getDocument(`pdf/lesson-${n}.pdf`).promise;
-    if (token !== renderToken) return;
-    $('pdf-status').textContent = '';
-
-    // Ширина канваса — по экрану (не больше 2x), чтобы не съедать память телефона
-    const cssWidth = $('pdf-pages').clientWidth || 360;
-    const targetWidth = cssWidth * Math.min(window.devicePixelRatio || 1, 2);
-
-    const first = await pdf.getPage(1);
-    const v1 = first.getViewport({ scale: 1 });
-    const ratio = v1.height / v1.width;
-
-    // Рисуем страницу, только когда она рядом с экраном
-    pageObserver = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (!e.isIntersecting) return;
-        pageObserver.unobserve(e.target);
-        renderPage(pdf, e.target, targetWidth, token);
-      });
-    }, { rootMargin: '600px 0px' });
-
-    for (let p = 1; p <= pdf.numPages; p++) {
-      const slot = document.createElement('div');
-      slot.className = 'pdf-slot';
-      slot.dataset.page = p;
-      slot.style.aspectRatio = `1 / ${ratio}`;
-      $('pdf-pages').appendChild(slot);
-      pageObserver.observe(slot);
-    }
-  } catch (e) {
-    if (token === renderToken) $('pdf-status').textContent = 'Материал к этому уроку скоро появится 🌿';
+function openLesson(n) {
+  if (!LESSONS_WITH_PDF.includes(n)) {
+    const msg = `Материал к уроку ${n} скоро появится 🌿`;
+    tg && tg.showAlert ? tg.showAlert(msg) : alert(msg);
+    return;
   }
-}
-
-async function renderPage(pdf, slot, targetWidth, token) {
-  try {
-    const page = await pdf.getPage(Number(slot.dataset.page));
-    if (token !== renderToken) return;
-    const base = page.getViewport({ scale: 1 });
-    const vp = page.getViewport({ scale: targetWidth / base.width });
-    const canvas = document.createElement('canvas');
-    canvas.width = Math.floor(vp.width);
-    canvas.height = Math.floor(vp.height);
-    await page.render({ canvasContext: canvas.getContext('2d'), viewport: vp }).promise;
-    if (token !== renderToken) return;
-    slot.appendChild(canvas);
-    page.cleanup();
-  } catch (e) {
-    slot.textContent = 'Не удалось загрузить страницу';
-  }
+  const url = new URL(`pdf/lesson-${n}.pdf`, location.href).href;
+  if (tg && tg.openLink) tg.openLink(url);
+  else window.open(url, '_blank');
 }
 
 // ---------- карточки ----------
