@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Армянский язык</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Armenian:wght@500;700&family=Noto+Sans+Armenian:wght@400;600&family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Декоративный гранат на фоне -->
+<svg class="bg-pomegranate" viewBox="0 0 200 200" aria-hidden="true">
+  <g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M100 52c-4-10-2-18 4-24M88 56l-8-14M112 56l8-14M100 52l0-10"/>
+    <path d="M100 56c-44 0-72 30-72 70 0 34 28 58 72 58s72-24 72-58c0-40-28-70-72-70z"/>
+    <path d="M100 56c-18 14-26 40-26 64s8 48 26 64M100 56c18 14 26 40 26 64s-8 48-26 64"/>
+    <path d="M32 112c24 8 48 10 68 10s44-2 68-10M36 148c22-6 42-8 64-8s42 2 64 8"/>
+    <circle cx="100" cy="100" r="4"/><circle cx="84" cy="128" r="4"/><circle cx="116" cy="128" r="4"/><circle cx="100" cy="156" r="4"/>
+  </g>
+</svg>
+
+<main id="app">
+
+  <!-- ГЛАВНАЯ -->
+  <section id="view-home" class="view active">
+    <header class="hero">
+      <div class="ornament" aria-hidden="true"></div>
+      <p class="hero-arm">Հայերեն</p>
+      <h1>Армянский язык</h1>
+      <p class="hero-sub">Материалы и карточки нашей группы</p>
+    </header>
+
+    <nav class="menu">
+      <button class="menu-card" data-go="lessons">
+        <span class="menu-icon">📖</span>
+        <span class="menu-text"><b>Уроки</b><small>Материалы по каждому занятию</small></span>
+        <span class="chev">›</span>
+      </button>
+      <button class="menu-card" data-go="cards">
+        <span class="menu-icon">🍎</span>
+        <span class="menu-text"><b>Карточки</b><small>Учим слова</small></span>
+        <span class="chev">›</span>
+      </button>
+    </nav>
+  </section>
+
+  <!-- СПИСОК УРОКОВ -->
+  <section id="view-lessons" class="view">
+    <h2 class="title">Уроки</h2>
+    <div id="lessons-grid" class="grid"></div>
+  </section>
+
+  <!-- ОДИН УРОК (PDF) -->
+  <section id="view-lesson" class="view">
+    <h2 class="title" id="lesson-title"></h2>
+    <div id="pdf-status" class="status"></div>
+    <div id="pdf-pages" class="pdf-pages"></div>
+  </section>
+
+  <!-- ТЕМЫ КАРТОЧЕК -->
+  <section id="view-cards" class="view">
+    <h2 class="title">Карточки</h2>
+    <div id="decks" class="decks"></div>
+  </section>
+
+  <!-- КОЛОДА -->
+  <section id="view-deck" class="view">
+    <h2 class="title" id="deck-title"></h2>
+    <div class="progress"><div id="progress-bar"></div></div>
+    <p class="counter" id="deck-counter"></p>
+
+    <div class="flip-wrap" id="flip">
+      <div class="flip-inner">
+        <div class="face front">
+          <span class="arm" id="card-arm"></span>
+          <span class="translit" id="card-translit"></span>
+          <span class="hint">нажми, чтобы перевернуть</span>
+        </div>
+        <div class="face back">
+          <span class="ru" id="card-ru"></span>
+          <span class="example" id="card-example"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="deck-actions">
+      <button id="btn-dont" class="btn btn-ghost">Ещё учу</button>
+      <button id="btn-know" class="btn btn-main">Знаю</button>
+    </div>
+    <button id="btn-shuffle" class="link-btn">🔀 Перемешать</button>
+  </section>
+
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
