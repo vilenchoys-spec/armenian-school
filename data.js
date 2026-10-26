@@ -2,7 +2,7 @@
 const LESSONS_COUNT = 12;
 
 // Уроки, для которых уже лежит файл pdf/lesson-N.pdf
-const LESSONS_WITH_PDF = [1, 2, 3];
+const LESSONS_WITH_PDF = [1, 2, 3, 4];
 
 // Колоды карточек. Сейчас тут примеры — заменим на ваши слова.
 const DECKS = [
