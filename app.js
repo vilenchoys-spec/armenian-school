@@ -46,41 +46,56 @@ function renderList(el, items, label, kind) {
 renderList($('lessons-grid'), LESSONS, 'Урок', 'lesson');
 renderList($('tasks-list'), TASKS, 'Задание', 'task');
 
-let currentLesson = null;
-
 function notify(msg) {
   tg && tg.showAlert ? tg.showAlert(msg) : alert(msg);
 }
 
+function absUrl(file) {
+  return new URL(`pdf/${file}`, location.href).href;
+}
+
+function openFile(url) {
+  if (tg && tg.openLink) tg.openLink(url, { try_browser: true });
+  else window.open(url, '_blank');
+}
+
+function downloadFile(url, name) {
+  if (tg && tg.isVersionAtLeast && tg.isVersionAtLeast('8.0') && tg.downloadFile) {
+    tg.downloadFile({ url, file_name: name });
+  } else {
+    openFile(url);
+  }
+}
+
+function fileButton(icon, title, sub, onclick) {
+  const b = document.createElement('button');
+  b.className = 'menu-card';
+  b.innerHTML =
+    `<span class="menu-icon">${icon}</span>` +
+    `<span class="menu-text"><b>${title}</b><small>${sub}</small></span>` +
+    `<span class="chev">›</span>`;
+  b.onclick = onclick;
+  return b;
+}
+
 function openMaterial(kind, item, label) {
   if (!item.pdf) {
-    notify(`Материал скоро появится 🌿`);
+    notify('Материал скоро появится 🌿');
     return;
   }
-  currentLesson = {
-    url: new URL(`pdf/${kind}-${item.n}.pdf`, location.href).href,
-    name: `${label} ${item.n} - Армянский.pdf`,
-  };
+  const files = [`${kind}-${item.n}.pdf`, ...(item.extra || [])];
+  const box = $('lesson-files');
+  box.innerHTML = '';
+  files.forEach((f, i) => {
+    const part = files.length > 1 ? ` — часть ${i + 1}` : '';
+    const url = absUrl(f);
+    const name = `${label} ${item.n}${part} - Армянский.pdf`;
+    box.appendChild(fileButton('👁', `Открыть${part}`, 'В браузере, можно приближать', () => openFile(url)));
+    box.appendChild(fileButton('⬇️', `Скачать${part}`, 'Сохранить PDF на телефон', () => downloadFile(url, name)));
+  });
   $('lesson-title').textContent = `${label} ${item.n}`;
   show('lesson');
 }
-
-$('btn-open').onclick = () => {
-  if (!currentLesson) return;
-  if (tg && tg.openLink) tg.openLink(currentLesson.url, { try_browser: true });
-  else window.open(currentLesson.url, '_blank');
-};
-
-$('btn-download').onclick = () => {
-  if (!currentLesson) return;
-  if (tg && tg.isVersionAtLeast && tg.isVersionAtLeast('8.0') && tg.downloadFile) {
-    tg.downloadFile({ url: currentLesson.url, file_name: currentLesson.name });
-  } else if (tg && tg.openLink) {
-    tg.openLink(currentLesson.url, { try_browser: true });
-  } else {
-    window.open(currentLesson.url, '_blank');
-  }
-};
 
 // ---------- карточки ----------
 const decksEl = $('decks');
