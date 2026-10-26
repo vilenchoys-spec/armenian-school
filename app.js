@@ -39,16 +39,41 @@ for (let n = 1; n <= LESSONS_COUNT; n++) {
   grid.appendChild(t);
 }
 
+let currentLesson = null;
+
+function notify(msg) {
+  tg && tg.showAlert ? tg.showAlert(msg) : alert(msg);
+}
+
 function openLesson(n) {
   if (!LESSONS_WITH_PDF.includes(n)) {
-    const msg = `Материал к уроку ${n} скоро появится 🌿`;
-    tg && tg.showAlert ? tg.showAlert(msg) : alert(msg);
+    notify(`Материал к уроку ${n} скоро появится 🌿`);
     return;
   }
-  const url = new URL(`pdf/lesson-${n}.pdf`, location.href).href;
-  if (tg && tg.openLink) tg.openLink(url);
-  else window.open(url, '_blank');
+  currentLesson = {
+    url: new URL(`pdf/lesson-${n}.pdf`, location.href).href,
+    name: `Урок ${n} - Армянский.pdf`,
+  };
+  $('lesson-title').textContent = `Урок ${n}`;
+  show('lesson');
 }
+
+$('btn-open').onclick = () => {
+  if (!currentLesson) return;
+  if (tg && tg.openLink) tg.openLink(currentLesson.url, { try_browser: true });
+  else window.open(currentLesson.url, '_blank');
+};
+
+$('btn-download').onclick = () => {
+  if (!currentLesson) return;
+  if (tg && tg.isVersionAtLeast && tg.isVersionAtLeast('8.0') && tg.downloadFile) {
+    tg.downloadFile({ url: currentLesson.url, file_name: currentLesson.name });
+  } else if (tg && tg.openLink) {
+    tg.openLink(currentLesson.url, { try_browser: true });
+  } else {
+    window.open(currentLesson.url, '_blank');
+  }
+};
 
 // ---------- карточки ----------
 const decksEl = $('decks');
