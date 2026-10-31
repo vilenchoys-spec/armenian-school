@@ -7,7 +7,7 @@
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Armenian:wght@500;700&family=Noto+Sans+Armenian:wght@400;600&family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=1793442130">
+<link rel="stylesheet" href="style.css?v=1793452000">
 </head>
 <body>
 
@@ -44,6 +44,11 @@
         <span class="menu-text"><b>Задания</b><small>Упражнения для практики</small></span>
         <span class="chev">›</span>
       </button>
+      <button class="menu-card" data-go="dict">
+        <span class="menu-icon">📒</span>
+        <span class="menu-text"><b>Словарик</b><small>Слова по порядку с переводом</small></span>
+        <span class="chev">›</span>
+      </button>
       <button class="menu-card" data-go="cards">
         <span class="menu-icon">🍎</span>
         <span class="menu-text"><b>Карточки</b><small>Учим слова</small></span>
@@ -62,6 +67,15 @@
   <section id="view-tasks" class="view">
     <h2 class="title">Задания</h2>
     <div id="tasks-list" class="grid"></div>
+  </section>
+
+  <!-- СЛОВАРИК -->
+  <section id="view-dict" class="view">
+    <h2 class="title">Словарик</h2>
+    <div class="dict">
+      <div class="dict-row dict-head"><span>№</span><span>Армянский</span><span>Русский</span><span>Транскрипция</span></div>
+      <div id="dict-body"></div>
+    </div>
   </section>
 
   <!-- ОДИН УРОК -->
@@ -105,7 +119,7 @@
 
 </main>
 
-<script src="data.js?v=1793442130"></script>
-<script src="app.js?v=1793442130"></script>
+<script src="data.js?v=1793452000"></script>
+<script src="app.js?v=1793452000"></script>
 </body>
 </html>

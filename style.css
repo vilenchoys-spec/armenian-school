@@ -171,3 +171,12 @@ h1 { font-family: 'Playfair Display', serif; font-size: 30px; margin: 4px 0 6px;
 .deck-all { background: var(--pomegranate); border-color: var(--pomegranate-dark); color: #fff; }
 .deck-all small { color: rgba(255,255,255,.8); }
 .deck-all .badge { background: #fff; color: var(--pomegranate); }
+
+/* DICT */
+.dict { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+.dict-row { display: grid; grid-template-columns: 26px 1.2fr 1fr 1fr; gap: 8px; padding: 9px 12px; border-top: 1px solid var(--line); font-size: 13px; align-items: baseline; }
+.dict-row:first-child, .dict-head { border-top: none; }
+.dict-head { background: var(--bg-2); color: var(--pomegranate); font-weight: 600; font-size: 11px; }
+.dict-row > span:first-child { color: var(--ink-soft); }
+.dict-arm { font-family: 'Noto Serif Armenian', serif; color: var(--pomegranate-dark); font-size: 15px; }
+.dict-row > span:last-child { color: var(--ink-soft); font-style: italic; }

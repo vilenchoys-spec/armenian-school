@@ -113,6 +113,19 @@ function openMaterial(kind, item, label) {
   show('lesson');
 }
 
+// ---------- словарик ----------
+DICT.forEach((w, i) => {
+  const r = document.createElement('div');
+  r.className = 'dict-row';
+  [i + 1, w.arm, w.ru, w.translit].forEach((t, k) => {
+    const c = document.createElement('span');
+    if (k === 1) c.className = 'dict-arm';
+    c.textContent = t;
+    r.appendChild(c);
+  });
+  $('dict-body').appendChild(r);
+});
+
 // ---------- карточки ----------
 const decksEl = $('decks');
 
