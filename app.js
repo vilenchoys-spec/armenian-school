@@ -115,10 +115,19 @@ function openMaterial(kind, item, label) {
 
 // ---------- карточки ----------
 const decksEl = $('decks');
-DECKS.forEach((d) => {
+
+// «Учить все» — все слова из всех колод, без повторов
+const seen = new Set();
+const ALL_DECK = {
+  id: 'all',
+  title: 'Учить все',
+  cards: DECKS.flatMap((d) => d.cards).filter((c) => !seen.has(c.arm) && seen.add(c.arm)),
+};
+
+[ALL_DECK, ...DECKS].forEach((d) => {
   const b = document.createElement('button');
-  b.className = 'deck';
-  b.innerHTML = `<span><b>${d.title}</b><small>${d.cards.length} слов</small></span><span class="badge">учить</span>`;
+  b.className = 'deck' + (d.id === 'all' ? ' deck-all' : '');
+  b.innerHTML = `<span><b>${d.id === 'all' ? '✨ ' : ''}${d.title}</b><small>${d.cards.length} слов</small></span><span class="badge">учить</span>`;
   b.onclick = () => openDeck(d);
   decksEl.appendChild(b);
 });

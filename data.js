@@ -86,5 +86,28 @@ const DECKS = [
       { arm: 'մատիտով', translit: 'матитов', ru: 'карандашом' },
       { arm: 'ֆուտբոլ', translit: 'футбол', ru: 'футбол' }
     ]
+  },
+  {
+    id: 'notebook',
+    title: 'Слова из тетради',
+    cards: [
+      { arm: 'մարդ', translit: 'мард', ru: 'человек' },
+      { arm: 'մայրիկ', translit: 'майрик', ru: 'мама' },
+      { arm: 'հայրիկ', translit: 'хайрик', ru: 'папа' },
+      { arm: 'տատիկ', translit: 'татик', ru: 'бабушка' },
+      { arm: 'պապիկ', translit: 'папик', ru: 'дедушка' },
+      { arm: 'բարև', translit: 'барев', ru: 'привет' },
+      { arm: 'լինել', translit: 'линел', ru: 'быть' },
+      { arm: 'անուն', translit: 'анун', ru: 'имя' },
+      { arm: 'էշ', translit: 'эш', ru: 'осёл' },
+      { arm: 'սանր', translit: 'санр', ru: 'расчёска' },
+      { arm: 'ոսկի', translit: 'воски', ru: 'золото' },
+      { arm: 'գինի', translit: 'гини', ru: 'вино' },
+      { arm: 'ջուր', translit: 'джур', ru: 'вода' },
+      { arm: 'հաց', translit: 'хац', ru: 'хлеб' },
+      { arm: 'լավ', translit: 'лав', ru: 'хорошо' },
+      { arm: 'վատ', translit: 'ват', ru: 'плохо' },
+      { arm: 'այո / ոչ', translit: 'айо / воч', ru: 'да / нет' }
+    ]
   }
 ];

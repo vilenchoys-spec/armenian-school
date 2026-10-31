@@ -167,3 +167,7 @@ h1 { font-family: 'Playfair Display', serif; font-size: 30px; margin: 4px 0 6px;
 .part-body small { color: var(--ink-soft); font-size: 13px; line-height: 1.35; }
 .part-actions { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .part-actions .btn { padding: 11px; font-size: 15px; }
+
+.deck-all { background: var(--pomegranate); border-color: var(--pomegranate-dark); color: #fff; }
+.deck-all small { color: rgba(255,255,255,.8); }
+.deck-all .badge { background: #fff; color: var(--pomegranate); }
