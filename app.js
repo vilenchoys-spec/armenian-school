@@ -126,6 +126,17 @@ DICT.forEach((w, i) => {
   $('dict-body').appendChild(r);
 });
 
+$('dict-search').addEventListener('input', (e) => {
+  const q = e.target.value.trim().toLowerCase().replace(/ё/g, 'е');
+  let shown = 0;
+  [...$('dict-body').children].forEach((r) => {
+    const ok = !q || r.textContent.toLowerCase().replace(/ё/g, 'е').includes(q);
+    r.hidden = !ok;
+    if (ok) shown++;
+  });
+  $('dict-empty').hidden = shown > 0;
+});
+
 // ---------- карточки ----------
 const decksEl = $('decks');
 

@@ -180,3 +180,7 @@ h1 { font-family: 'Playfair Display', serif; font-size: 30px; margin: 4px 0 6px;
 .dict-row > span:first-child { color: var(--ink-soft); }
 .dict-arm { font-family: 'Noto Serif Armenian', serif; color: var(--pomegranate-dark); font-size: 15px; }
 .dict-row > span:last-child { color: var(--ink-soft); font-style: italic; }
+
+.search { width: 100%; padding: 12px 14px; margin-bottom: 12px; font: inherit; font-size: 15px; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 14px; outline: none; }
+.search:focus { border-color: var(--pomegranate); }
+.dict-row[hidden], [hidden] { display: none !important; }

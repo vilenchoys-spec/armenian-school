@@ -7,7 +7,7 @@
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Armenian:wght@500;700&family=Noto+Sans+Armenian:wght@400;600&family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=1793452105">
+<link rel="stylesheet" href="style.css?v=1793606383">
 </head>
 <body>
 
@@ -72,6 +72,8 @@
   <!-- СЛОВАРИК -->
   <section id="view-dict" class="view">
     <h2 class="title">Словарик</h2>
+    <input id="dict-search" class="search" type="search" placeholder="🔍 Поиск: слово по-русски или по-армянски" autocomplete="off">
+    <p id="dict-empty" class="status" hidden>Ничего не найдено</p>
     <div class="dict">
       <div class="dict-row dict-head"><span>№</span><span>Армянский</span><span>Русский</span><span>Транскрипция</span></div>
       <div id="dict-body"></div>
@@ -119,7 +121,7 @@
 
 </main>
 
-<script src="data.js?v=1793452105"></script>
-<script src="app.js?v=1793452105"></script>
+<script src="data.js?v=1793606383"></script>
+<script src="app.js?v=1793606383"></script>
 </body>
 </html>
